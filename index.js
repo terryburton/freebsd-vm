@@ -161,7 +161,7 @@ async function setup(nat, mem) {
     } else {
       let cmd2 = "pkg  install  -y rsync";
       await execSSH(cmd2, "Setup rsync");
-      await exec.exec("rsync -auvzrtopg  --exclude _actions/terryburton/freebsd-vm  /Users/runner/work/ freebsd:work");
+      await exec.exec("rsync -auvzrtopg  -e 'ssh -T' --exclude _actions/terryburton/freebsd-vm  /Users/runner/work/ freebsd:work");
     }
 
     core.info("OK, Ready!");
@@ -213,7 +213,7 @@ async function main() {
       let sync = core.getInput("sync");
       if (sync != "sshfs") {
         core.info("get back by rsync");
-        await exec.exec("rsync -uvzrtopg  freebsd:work/ /Users/runner/work");
+        await exec.exec("rsync -uvzrtopg  -e 'ssh -T'  freebsd:work/ /Users/runner/work");
       }
     }
   }
