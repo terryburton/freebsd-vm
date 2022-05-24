@@ -161,7 +161,7 @@ async function setup(nat, mem) {
     } else {
       let cmd2 = "pkg  install  -y rsync";
       await execSSH(cmd2, "Setup rsync");
-      await exec.exec("rsync -auvzrtopg  --exclude _actions/vmactions/freebsd-vm  /Users/runner/work/ freebsd:work");
+      await exec.exec("rsync -auvzrtopg  --exclude '_actions/*/freebsd-vm'  /Users/runner/work/ freebsd:work");
     }
 
     core.info("OK, Ready!");
